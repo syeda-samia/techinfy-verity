@@ -1,12 +1,10 @@
-torch>=1.9.0
-torchvision>=0.10.0
-timm>=0.6.12
-transformers>=4.20.0
-opencv-python-headless>=4.5.5
-Pillow>=8.3.0
-numpy>=1.21.0
-scipy>=1.7.0
-scikit-image>=0.19.0
-streamlit
-plotly
-git+https://github.com/openai/CLIP.git
+streamlit==1.60.0
+torch==2.13.0
+torchvision==0.28.0
+transformers==5.14.1
+pillow==12.3.0
+opencv-python-headless==5.0.0.93
+clip @ git+https://github.com/openai/CLIP.git
+timm==1.0.28
+scikit-image==0.26.0
+numpy==2.5.1

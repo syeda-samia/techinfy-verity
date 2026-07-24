@@ -1,10 +1,3 @@
-"""
-app.py - Streamlit frontend for Techinfy Verity
-Uses the existing backend (inference.py -> decision_engine.py -> models.py + forensics.py)
-without any changes to the detection logic.
-"""
-
-
 import streamlit as st
 import tempfile
 import os

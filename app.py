@@ -4,6 +4,7 @@ Uses the existing backend (inference.py -> decision_engine.py -> models.py + for
 without any changes to the detection logic.
 """
 
+
 import streamlit as st
 import tempfile
 import os
@@ -11,7 +12,14 @@ import time
 import plotly.graph_objects as go
 
 from inference import detect_image
+import sys
+import subprocess
 
+# Force reinstall if dependencies are broken
+try:
+    import plotly
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "plotly==5.18.0"])
 # ----------------------------------------------------------------------
 # Page config
 # ----------------------------------------------------------------------

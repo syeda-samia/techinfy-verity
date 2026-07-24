@@ -8,3 +8,4 @@ clip @ git+https://github.com/openai/CLIP.git
 timm==1.0.28
 scikit-image==0.26.0
 numpy==2.5.1
+plotly==5.24.0  # <-- ADD THIS LINE

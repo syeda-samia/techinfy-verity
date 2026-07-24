@@ -1,6 +1,7 @@
+# Remove torch version pinning and let Streamlit choose
 streamlit==1.36.0
-torch==2.3.1
-torchvision==0.18.1
+torch  # ← No version specified
+torchvision
 transformers==4.41.2
 pillow==10.3.0
 opencv-python-headless==4.9.0.80

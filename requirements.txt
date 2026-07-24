@@ -1,9 +1,8 @@
-# Remove torch version pinning and let Streamlit choose
 streamlit==1.36.0
-torch  
-torchvision
+torch==2.3.1
+torchvision==0.18.1
 transformers==4.41.2
-pillow
+pillow==10.3.0
 opencv-python-headless==4.9.0.80
 clip @ git+https://github.com/openai/CLIP.git
 timm==0.9.16

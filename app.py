@@ -1,3 +1,9 @@
+"""
+app.py - Streamlit frontend for Techinfy Verity
+Uses the existing backend (inference.py -> decision_engine.py -> models.py + forensics.py)
+without any changes to the detection logic.
+"""
+
 import streamlit as st
 import tempfile
 import os
@@ -5,15 +11,7 @@ import time
 import plotly.graph_objects as go
 
 from inference import detect_image
-import sys
-import subprocess
-from inference import ImageClassifier
 
-# # Force reinstall if dependencies are broken
-# try:
-#     import plotly
-# except ImportError:
-#     subprocess.check_call([sys.executable, "-m", "pip", "install", "plotly==5.18.0"])
 # ----------------------------------------------------------------------
 # Page config
 # ----------------------------------------------------------------------
@@ -23,13 +21,6 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed",
 )
-@st.cache_resource(show_spinner="Loading AI detection model...")
-def get_classifier():
-    return ImageClassifier(
-        model_weight=0.7,
-        forensic_weight=0.3,
-        auto_fix=True
-    )
 
 # ----------------------------------------------------------------------
 # Theme (matches the FastAPI frontend: dark ink + teal/red/amber verdicts)
@@ -244,8 +235,7 @@ if analyze_clicked and uploaded_file is not None:
             for step in steps:
                 st.write(f"› {step}")
                 time.sleep(0.15)
-            classifier = get_classifier()
-            result = classifier.run_detection(tmp_path, verbose=False)
+            result = detect_image(tmp_path, verbose=False)
             if result.get("error"):
                 error_msg = result["error"]
                 status.update(label="Scan failed", state="error")

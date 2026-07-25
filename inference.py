@@ -1,4 +1,4 @@
-# inference.py - FIXED with proper JSON serialization
+# inference.py - FIXED with proper JSON serialization + singleton model caching
 import json
 import os
 import sys
@@ -172,9 +172,23 @@ class ImageClassifier:
                 'verdict': 'Error'
             }
 
+# ----------------------------------------------------------------------
+# SINGLETON: load the classifier (and its models) only ONCE per process,
+# instead of re-creating it — and re-loading CLIP + SDXL — on every call.
+# This is the fix for repeated "Loading models..." on every upload and
+# the memory crash after a few images.
+# ----------------------------------------------------------------------
+_classifier_instance = None
+
+def get_classifier():
+    global _classifier_instance
+    if _classifier_instance is None:
+        _classifier_instance = ImageClassifier(auto_fix=True)
+    return _classifier_instance
+
 def detect_image(file_path, verbose=True):
-    """Quick detection function"""
-    classifier = ImageClassifier(auto_fix=True)
+    """Quick detection function - reuses a single cached classifier instance."""
+    classifier = get_classifier()
     return classifier.run_detection(file_path, verbose)
 
 if __name__ == "__main__":
@@ -183,12 +197,3 @@ if __name__ == "__main__":
         print(json.dumps(result, indent=2, default=str))
     else:
         print("Usage: python inference.py <image_path>")
-
-
-
-
-
-
-
-
-

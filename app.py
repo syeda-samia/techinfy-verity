@@ -10,8 +10,8 @@ import time
 import plotly.graph_objects as go
 from inference import detect_image
 import streamlit as st
-if "HF_TOKEN" in st.secrets:
-    os.environ["HF_TOKEN"] = st.secrets["HF_TOKEN"]
+if "GROQ_API_KEY" in st.secrets:
+    os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
 
 # ----------------------------------------------------------------------
 # Page config

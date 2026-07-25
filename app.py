@@ -1,5 +1,4 @@
-"""
-app.py - Streamlit frontend for Techinfy Verity
+"""app.py - Streamlit frontend for Techinfy Verity
 Uses the existing backend (inference.py -> decision_engine.py -> models.py + forensics.py)
 without any changes to the detection logic.
 """
@@ -135,7 +134,7 @@ uploaded_file = st.file_uploader(
     type=["jpg", "jpeg", "png", "bmp", "tiff", "webp"],
 )
 
-analyze_clicked = st.button("🔍 Analyze Image", type="primary", use_container_width=True, disabled=(uploaded_file is None))
+analyze_clicked = st.button("🔍 Analyze Image", type="primary", width="stretch", disabled=(uploaded_file is None))
 
 # ----------------------------------------------------------------------
 # Helpers
@@ -278,7 +277,7 @@ if analyze_clicked and uploaded_file is not None:
         </div>
         """, unsafe_allow_html=True)
 
-        st.plotly_chart(build_gauge(ai_prob, css_key), use_container_width=True, config={"displayModeBar": False})
+        st.plotly_chart(build_gauge(ai_prob, css_key), width="stretch", config={"displayModeBar": False})
 
         if model_agreement is not None:
             chip_class = "good" if model_agreement else "warn"

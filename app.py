@@ -3,9 +3,16 @@ Uses the existing backend (inference.py -> decision_engine.py -> models.py + for
 without any changes to the detection logic.
 """
 
-import streamlit as st
-import tempfile
 import os
+import streamlit as st
+
+# ----------------------------------------------------------------------
+# Bridge Streamlit secret -> environment variable (for Groq API)
+# ----------------------------------------------------------------------
+if "technify" in st.secrets:
+    os.environ["GROQ_API_KEY"] = st.secrets["technify"]
+
+import tempfile
 import time
 import plotly.graph_objects as go
 
